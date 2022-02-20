@@ -47,7 +47,6 @@ def get_age(message): #получаем фамилию
         bot.register_next_step_handler(message, get_age)
     print(age)
 
-
 def main():
     while True:
         try:
