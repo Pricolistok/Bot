@@ -30,10 +30,23 @@ def get_surname(message):
     surname = message.text
     print(name, ' ', surname)
     Base.metadata.create_all(engine)
-    with Session() as session:
-        new = Users(name = name, surname = surname)
-        session.add(new)
-        session.commit()
+    bot.send_message(message.from_user.id, 'Введите ваш возраст')
+    bot.register_next_step_handler(message, get_age)
+
+def get_age(message): #получаем фамилию
+    global age
+    age = message.text
+    if age.isdigit():
+        age = int(age)
+        with Session() as session:
+            new = Users(name = name, surname = surname, age = age)
+            session.add(new)
+            session.commit()
+    else:
+        bot.send_message(message.from_user.id, 'Введите корректный возраст')
+        bot.register_next_step_handler(message, get_age)
+    print(age)
+
 
 def main():
     while True:

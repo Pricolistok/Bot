@@ -11,3 +11,4 @@ class Users(Base):
     id = Column(Integer, primary_key=True)
     name = Column(Integer)
     surname = Column(String)
+    age = Column(Integer)
